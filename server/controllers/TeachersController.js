@@ -1,32 +1,16 @@
-const db = require('../db');
+const { Teachers } = require("../models")
 
-const showTeachers = (req, res) => {
-    const sqlGet = `SELECT * FROM teachers`;
-    db.query(sqlGet, (error, result) => {
-        res.send(result)
-    });
+const showTeachers = async (req, res) => {
+    const listOfTeachers = await Teachers.findAll();
+    res.send(listOfTeachers);
 }
 
-const insertTeachers = (req, res) => {
-    let data = [ 
-        req.body.name, 
-        req.body.subjectName, 
-        req.body.email, 
-        req.body.work_contact 
-    ];
+const insertTeachers = async (req, res) => {
+    let teacher = req.body;
 
-    const sqlInsert = "INSERT INTO teachers (name, subjectName, email, work_contact) VALUES (?,?,?,?);"
-
-    db.query(sqlInsert, data, (error, result) => {
-        if (error) {
-            console.log(error);
-            res.status(500).send('Error inserting teacher');
-        } else {
-            res.send('Teacher added');
-        }
-    });
+    await Teachers.create(teacher);
+    res.json(teacher);
 }
-
 
 module.exports =  {
     showTeachers,

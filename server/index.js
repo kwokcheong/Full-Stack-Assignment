@@ -1,11 +1,10 @@
-const path = require('path');
 const express = require('express');
 const mysql = require("mysql2");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
-const db = require('./db')
+const db = require('./models')
 require('dotenv').config()
 
 //set up express
@@ -22,6 +21,8 @@ app.use('/teachers', teachersRouter);
 
 const PORT = process.env.PORT || 3001
 
-app.listen(PORT, () => {
-    console.log(`server is running at ${PORT}`);
+db.sequelize.sync().then(() => {
+    app.listen(PORT, () => {
+        console.log(`server is running at ${PORT}`);
+    })
 })

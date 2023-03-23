@@ -1,16 +1,13 @@
+body, html {
+  min-height: 100%;
+}
+
 .App {
-  text-align: center;
-}
-
-.form{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  min-height: 100vh;
+  background-color: #fafafa;
 }
 
-.form input {
-  width: 200px;
-  height: 10px;
-  margin: 10px;
+.errorText {
+  color: red;
 }
