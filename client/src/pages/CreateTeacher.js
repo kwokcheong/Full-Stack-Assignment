@@ -22,15 +22,13 @@ function CreateTeacher() {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      Axios.post('http://localhost:3001/teachers/insert', formValues).then(
-        () => {
-          setIsSubmit(false);
-          console.log('New teacher inserted');
-          navigate('/');
-        }
-      );
+      Axios.post('http://localhost:3001/api/teachers', formValues).then(() => {
+        setIsSubmit(false);
+        console.log('New teacher inserted');
+        navigate('/');
+      });
     }
-  }, [formErrors, formValues, isSubmit]);
+  }, [formErrors, formValues, isSubmit, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
