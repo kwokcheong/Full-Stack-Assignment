@@ -45,10 +45,10 @@ function NavigationBar() {
           <img src={logoImg} alt="" style={{ width: '95%', height: '70%' }} />
         </a>
         <Nav className="me-auto">
-          <Nav.Link className="nav-link" href="/viewTeacher">
+          <Nav.Link className="nav-link" href="/createTeacher">
             Classes
           </Nav.Link>
-          <Nav.Link className="nav-link" href="/createTeacher">
+          <Nav.Link className="nav-link" href="/viewTeacher">
             Teachers
           </Nav.Link>
         </Nav>

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import CustomCard from './CustomCard';
 
 function CreateTeacher() {
   const initialValues = {
@@ -25,7 +24,7 @@ function CreateTeacher() {
       Axios.post('http://localhost:3001/api/teachers', formValues).then(() => {
         setIsSubmit(false);
         console.log('New teacher inserted');
-        navigate('/');
+        navigate('/viewTeacher');
       });
     }
   }, [formErrors, formValues, isSubmit, navigate]);
@@ -67,83 +66,58 @@ function CreateTeacher() {
   };
 
   return (
-    <div className="container" style={{ maxWidth: '95%' }}>
-      <h2
-        style={{
-          textAlign: 'left',
-          fontSize: '25px',
-          fontWeight: 'bold',
-          paddingTop: '25px',
-          paddingBottom: '25px',
-        }}
-      >
-        Add Teacher
-      </h2>
-      <Card
-        style={{
-          boxShadow: '0px 1px 2px 1px rgba(152, 152, 152, 0.2)',
-        }}
-      >
-        <div style={{ maxWidth: '40%' }}>
-          <Card.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="name"
-                  size="lg"
-                  placeholder="Name"
-                  name="name"
-                  onChange={handleChange}
-                />
-                <p className="errorText">{formErrors.name}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Subject</Form.Label>
-                <Form.Control
-                  type="select"
-                  size="lg"
-                  placeholder="Select a subject"
-                  name="subjectName"
-                  onChange={handleChange}
-                />
-                <p className="errorText">{formErrors.subjectName}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email Address</Form.Label>
-                <Form.Control
-                  type="email"
-                  size="lg"
-                  placeholder="Email address"
-                  name="email"
-                  onChange={handleChange}
-                />
-                <p className="errorText">{formErrors.email}</p>
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Work Contact Number</Form.Label>
-                <Form.Control
-                  type="number"
-                  size="lg"
-                  placeholder="Work contact number"
-                  name="work_contact"
-                  onChange={handleChange}
-                />
-                <p className="errorText">{formErrors.work_contact}</p>
-              </Form.Group>
-            </Form>
-          </Card.Body>
-        </div>
-      </Card>
-      <Button
-        variant="primary"
-        className="float-end"
-        style={{ margin: '15px', backgroundColor: '#135BB4' }}
-        onClick={handleSubmit}
-      >
-        Add Teacher
-      </Button>
-    </div>
+    <CustomCard
+      title="Add Teacher"
+      handleClick={handleSubmit}
+      showSubmitButton={true}
+    >
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
+            size="lg"
+            placeholder="Name"
+            name="name"
+            onChange={handleChange}
+          />
+          <p className="errorText">{formErrors.name}</p>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Subject</Form.Label>
+          <Form.Control
+            type="select"
+            size="lg"
+            placeholder="Select a subject"
+            name="subjectName"
+            onChange={handleChange}
+          />
+          <p className="errorText">{formErrors.subjectName}</p>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            type="email"
+            size="lg"
+            placeholder="Email address"
+            name="email"
+            onChange={handleChange}
+          />
+          <p className="errorText">{formErrors.email}</p>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Work Contact Number</Form.Label>
+          <Form.Control
+            type="number"
+            size="lg"
+            placeholder="Work contact number"
+            name="work_contact"
+            onChange={handleChange}
+          />
+          <p className="errorText">{formErrors.work_contact}</p>
+        </Form.Group>
+      </Form>
+    </CustomCard>
   );
 }
 
