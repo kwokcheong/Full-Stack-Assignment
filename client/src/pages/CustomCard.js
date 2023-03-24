@@ -26,10 +26,10 @@ function CustomCard(props) {
             {showAddButton && (
               <Button
                 variant="primary"
-                style={{ marginTop: '15px', backgroundColor: '#135BB4' }}
+                style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
                 onClick={handleClick}
               >
-                Add Teacher
+                + Add Teacher
               </Button>
             )}
           </div>
@@ -49,7 +49,7 @@ function CustomCard(props) {
           <Button
             variant="primary"
             className="float-end"
-            style={{ marginTop: '15px', backgroundColor: '#135BB4' }}
+            style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
             onClick={handleClick}
           >
             Add Teacher

@@ -1,18 +1,18 @@
-const { Teachers } = require("../models")
+const { Teachers } = require('../models');
 
 const showTeachers = async (req, res) => {
-    const listOfTeachers = await Teachers.findAll();
-    res.send(listOfTeachers);
-}
+  const listOfTeachers = await Teachers.findAll();
+  res.send(listOfTeachers);
+};
 
 const insertTeachers = async (req, res) => {
-    let teacher = req.body;
+  let teacherInfo = req.body;
 
-    await Teachers.create(teacher);
-    res.json(teacher);
-}
+  await Teachers.create(teacherInfo);
+  res.json(teacherInfo);
+};
 
-module.exports =  {
-    showTeachers,
-    insertTeachers
+module.exports = {
+  showTeachers,
+  insertTeachers,
 };

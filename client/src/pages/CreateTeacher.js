@@ -14,6 +14,15 @@ function CreateTeacher() {
     work_contact: '',
   };
 
+  const mainSubjectList = [
+    'English Language',
+    'Mother Tongue Language',
+    'Mathematics',
+    'Science',
+    'Art',
+    'Physical Education',
+  ];
+
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -85,13 +94,14 @@ function CreateTeacher() {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Subject</Form.Label>
-          <Form.Control
-            type="select"
-            size="lg"
-            placeholder="Select a subject"
-            name="subjectName"
-            onChange={handleChange}
-          />
+          <Form.Select size="lg" name="subjectName" onChange={handleChange}>
+            <option value="" disabled selected hidden>
+              Select a Subject
+            </option>
+            {mainSubjectList.map((val) => {
+              return <option value={val}>{val}</option>;
+            })}
+          </Form.Select>
           <p className="errorText">{formErrors.subjectName}</p>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">

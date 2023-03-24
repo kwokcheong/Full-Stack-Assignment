@@ -16,7 +16,6 @@ app.use(cookieParser());
 //Set up routers
 const apiRouter = require('./routes/ApiRouter');
 
-// Frontend endpoint setup
 app.use('/api', apiRouter);
 
 const PORT = process.env.PORT || 3001;

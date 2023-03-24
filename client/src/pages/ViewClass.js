@@ -7,46 +7,44 @@ import Table from 'react-bootstrap/Table';
 import CustomCard from './CustomCard';
 import Button from 'react-bootstrap/Button';
 
-function ViewTeacher() {
-  const [teacherList, setTeacherList] = useState([]);
+function ViewClass() {
+  const [classList, setClassList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/teachers').then((response) => {
-      setTeacherList(response.data);
+    Axios.get('http://localhost:3001/api/classes').then((response) => {
+      setClassList(response.data);
     });
   }, []);
 
-  const handleAddTeacherClick = () => {
-    navigate('/createTeacher');
+  const handleAddClassesClick = () => {
+    navigate('/createClass');
   };
 
   return (
     <CustomCard
-      title="Teachers"
-      handleClick={handleAddTeacherClick}
+      title="Classes"
+      handleClick={handleAddClassesClick}
       showAddButton={true}
     >
-      {teacherList.length > 0 ? (
+      {classList.length > 0 ? (
         <Table style={{ tableLayout: 'fixed' }}>
           <thead style={{ backgroundColor: 'rgba(182, 182, 182, 0.2)' }}>
             <tr>
               <th style={{ width: '10%' }}>#</th>
-              <th style={{ width: '20%' }}>Name</th>
-              <th style={{ width: '25%' }}>Subject</th>
-              <th style={{ width: '25%' }}>Email</th>
-              <th style={{ width: '20%' }}>Work Contact</th>
+              <th style={{ width: '20%' }}>Class Level</th>
+              <th style={{ width: '25%' }}>Class Name</th>
+              <th style={{ width: '25%' }}>Form Teacher</th>
             </tr>
           </thead>
           <tbody>
-            {teacherList.map((val, i) => {
+            {classList.map((val, i) => {
               return (
                 <tr key={val.id}>
                   <td>{i + 1}</td>
+                  <td>{val.level}</td>
                   <td>{val.name}</td>
-                  <td>{val.subjectName}</td>
-                  <td>{val.email}</td>
-                  <td>{val.work_contact}</td>
+                  <td>{val.TeacherId}</td>
                 </tr>
               );
             })}
@@ -59,7 +57,7 @@ function ViewTeacher() {
             variant="primary"
             className="float-end"
             style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
-            onClick={handleAddTeacherClick}
+            onClick={handleAddClassesClick}
           >
             + Add Teacher
           </Button>
@@ -69,4 +67,4 @@ function ViewTeacher() {
   );
 }
 
-export default ViewTeacher;
+export default ViewClass;
