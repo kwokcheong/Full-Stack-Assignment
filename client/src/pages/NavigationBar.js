@@ -1,9 +1,11 @@
+import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 import logoImg from '../School_Portal.png';
 import '../nav.css';
 import { useEffect } from 'react';
 
-function Navbar() {
+function NavigationBar() {
   useEffect(() => {
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -29,26 +31,30 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="nav">
-      <a
-        href="/products/"
-        style={{
-          width: '230px',
-          height: '50px',
-          marginTop: '15px',
-          marginRight: '55px',
-        }}
-      >
-        <img src={logoImg} alt="" style={{ width: '95%', height: '70%' }} />
-      </a>
-      <a href="/" className="nav-link">
-        Classes
-      </a>
-      <a href="/createTeacher" className="nav-link">
-        Teachers
-      </a>
-    </nav>
+    <Navbar className="nav" fixed="top">
+      <Container>
+        <a
+          href="/products/"
+          style={{
+            width: '230px',
+            height: '50px',
+            marginTop: '7px',
+            marginRight: '80px',
+          }}
+        >
+          <img src={logoImg} alt="" style={{ width: '95%', height: '70%' }} />
+        </a>
+        <Nav className="me-auto">
+          <Nav.Link className="nav-link" href="/">
+            Classes
+          </Nav.Link>
+          <Nav.Link className="nav-link" href="/createTeacher">
+            Teachers
+          </Nav.Link>
+        </Nav>
+      </Container>
+    </Navbar>
   );
 }
 
-export default Navbar;
+export default NavigationBar;

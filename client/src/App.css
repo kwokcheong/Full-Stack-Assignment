@@ -5,7 +5,13 @@ body, html {
 .App {
   justify-content: center;
   min-height: 100vh;
+}
+
+#main-content {
   background-color: #fafafa;
+  min-height: 100vh;
+  max-width: 100%;
+  padding-top: 100px;
 }
 
 .errorText {

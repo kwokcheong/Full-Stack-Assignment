@@ -81,7 +81,11 @@ function CreateTeacher() {
       >
         Add Teacher
       </h2>
-      <Card>
+      <Card
+        style={{
+          boxShadow: '0px 1px 2px 1px rgba(152, 152, 152, 0.2)',
+        }}
+      >
         <div style={{ maxWidth: '40%' }}>
           <Card.Body>
             <Form onSubmit={handleSubmit}>
