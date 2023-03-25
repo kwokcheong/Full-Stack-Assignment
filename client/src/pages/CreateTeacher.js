@@ -9,9 +9,9 @@ import CustomCard from './CustomCard';
 function CreateTeacher() {
   const initialValues = {
     name: '',
-    subjectName: '',
+    subject: '',
     email: '',
-    work_contact: '',
+    contactNumber: '',
   };
 
   const mainSubjectList = [
@@ -26,13 +26,19 @@ function CreateTeacher() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [teacherList, setTeacherList] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/api/teachers').then((response) => {
+      const record = response.data;
+      setTeacherList(record.data);
+    });
+  }, []);
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       Axios.post('http://localhost:3001/api/teachers', formValues).then(() => {
-        setIsSubmit(false);
-        console.log('New teacher inserted');
         navigate('/viewTeacher');
       });
     }
@@ -49,6 +55,10 @@ function CreateTeacher() {
     setIsSubmit(true);
   };
 
+  const emailExists = (email) => {
+    return teacherList.some((teacher) => teacher.email === email);
+  };
+
   const validate = (values) => {
     const errors = {};
     const emailRegex =
@@ -58,18 +68,20 @@ function CreateTeacher() {
     }
     if (!values.email) {
       errors.email = 'Email is required!';
+    } else if (emailExists(values.email)) {
+      errors.email = 'This email already exists!';
     } else if (!emailRegex.test(values.email)) {
       errors.email = 'This is not a valid Email!';
     }
-    if (!values.subjectName) {
-      errors.subjectName = 'SubjectName is required!';
+    if (!values.subject) {
+      errors.subject = 'Subject is required!';
     }
-    if (!values.work_contact) {
-      errors.work_contact = 'Work Contact Number is required!';
-    } else if (values.work_contact.toString().length < 8) {
-      errors.work_contact = 'Work Contact Number must be more than 8 digits';
-    } else if (values.work_contact.toString().length > 10) {
-      errors.work_contact = 'Work Contact Number must be less than 10 digits';
+    if (!values.contactNumber) {
+      errors.contactNumber = 'Work Contact Number is required!';
+    } else if (values.contactNumber.toString().length < 8) {
+      errors.contactNumber = 'Work Contact Number must be more than 8 digits';
+    } else if (values.contactNumber.toString().length > 10) {
+      errors.contactNumber = 'Work Contact Number must be less than 10 digits';
     }
     return errors;
   };
@@ -79,9 +91,10 @@ function CreateTeacher() {
       title="Add Teacher"
       handleClick={handleSubmit}
       showSubmitButton={true}
+      modelName="teacher"
     >
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="name"
@@ -89,22 +102,38 @@ function CreateTeacher() {
             placeholder="Name"
             name="name"
             onChange={handleChange}
+            isInvalid={formErrors.name}
+            id="custom-validation"
           />
-          <p className="errorText">{formErrors.name}</p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.name}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Label>Subject</Form.Label>
-          <Form.Select size="lg" name="subjectName" onChange={handleChange}>
+          <Form.Select
+            size="lg"
+            name="subject"
+            onChange={handleChange}
+            isInvalid={formErrors.subject}
+            id="custom-validation"
+          >
             <option value="" disabled selected hidden>
               Select a Subject
             </option>
-            {mainSubjectList.map((val) => {
-              return <option value={val}>{val}</option>;
+            {mainSubjectList.map((val, i) => {
+              return (
+                <option key={i} value={val}>
+                  {val}
+                </option>
+              );
             })}
           </Form.Select>
-          <p className="errorText">{formErrors.subjectName}</p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.subject}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
@@ -112,19 +141,27 @@ function CreateTeacher() {
             placeholder="Email address"
             name="email"
             onChange={handleChange}
+            isInvalid={formErrors.email}
+            id="custom-validation"
           />
-          <p className="errorText">{formErrors.email}</p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.email}
+          </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mb-3">
           <Form.Label>Work Contact Number</Form.Label>
           <Form.Control
             type="number"
             size="lg"
             placeholder="Work contact number"
-            name="work_contact"
+            name="contactNumber"
             onChange={handleChange}
+            isInvalid={formErrors.contactNumber}
+            id="custom-validation"
           />
-          <p className="errorText">{formErrors.work_contact}</p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.contactNumber}
+          </Form.Control.Feedback>
         </Form.Group>
       </Form>
     </CustomCard>

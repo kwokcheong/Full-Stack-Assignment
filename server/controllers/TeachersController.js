@@ -1,8 +1,10 @@
 const { Teachers } = require('../models');
 
 const showTeachers = async (req, res) => {
-  const listOfTeachers = await Teachers.findAll();
-  res.send(listOfTeachers);
+  const listOfTeachers = await Teachers.findAll({
+    attributes: { exclude: ['id'] },
+  });
+  res.send({ data: listOfTeachers });
 };
 
 const insertTeachers = async (req, res) => {

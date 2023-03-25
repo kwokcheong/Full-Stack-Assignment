@@ -13,9 +13,12 @@ function ViewClass() {
 
   useEffect(() => {
     Axios.get('http://localhost:3001/api/classes').then((response) => {
-      setClassList(response.data);
+      const record = response.data;
+      setClassList(record.data);
     });
   }, []);
+
+  console.log(classList);
 
   const handleAddClassesClick = () => {
     navigate('/createClass');
@@ -26,6 +29,7 @@ function ViewClass() {
       title="Classes"
       handleClick={handleAddClassesClick}
       showAddButton={true}
+      modelName="class"
     >
       {classList.length > 0 ? (
         <Table style={{ tableLayout: 'fixed' }}>
@@ -44,7 +48,7 @@ function ViewClass() {
                   <td>{i + 1}</td>
                   <td>{val.level}</td>
                   <td>{val.name}</td>
-                  <td>{val.TeacherId}</td>
+                  <td>{val.formTeacher.name}</td>
                 </tr>
               );
             })}

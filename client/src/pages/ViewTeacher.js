@@ -13,7 +13,8 @@ function ViewTeacher() {
 
   useEffect(() => {
     Axios.get('http://localhost:3001/api/teachers').then((response) => {
-      setTeacherList(response.data);
+      const record = response.data;
+      setTeacherList(record.data);
     });
   }, []);
 
@@ -26,6 +27,7 @@ function ViewTeacher() {
       title="Teachers"
       handleClick={handleAddTeacherClick}
       showAddButton={true}
+      modelName="teacher"
     >
       {teacherList.length > 0 ? (
         <Table style={{ tableLayout: 'fixed' }}>
@@ -41,12 +43,12 @@ function ViewTeacher() {
           <tbody>
             {teacherList.map((val, i) => {
               return (
-                <tr key={val.id}>
+                <tr key={i}>
                   <td>{i + 1}</td>
                   <td>{val.name}</td>
-                  <td>{val.subjectName}</td>
+                  <td>{val.subject}</td>
                   <td>{val.email}</td>
-                  <td>{val.work_contact}</td>
+                  <td>{val.contactNumber}</td>
                 </tr>
               );
             })}

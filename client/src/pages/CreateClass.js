@@ -10,16 +10,16 @@ function CreateClass() {
   const initialValues = {
     level: '',
     name: '',
-    TeacherId: '',
+    formTeacher: '',
   };
 
   const classLevelList = [
-    'Primary1',
-    'Primary2',
-    'Primary3',
-    'Primary4',
-    'Primary5',
-    'Primary6',
+    'Primary 1',
+    'Primary 2',
+    'Primary 3',
+    'Primary 4',
+    'Primary 5',
+    'Primary 6',
   ];
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -30,14 +30,13 @@ function CreateClass() {
 
   useEffect(() => {
     Axios.get('http://localhost:3001/api/teachers').then((response) => {
-      setTeacherList(response.data);
+      const teacherRecord = response.data;
+      setTeacherList(teacherRecord.data);
     });
 
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       Axios.post('http://localhost:3001/api/classes', formValues).then(() => {
-        setIsSubmit(false);
-        console.log('New teacher inserted');
-        navigate('/viewClasses');
+        navigate('/viewClass');
       });
     }
   }, [formErrors, formValues, isSubmit, navigate]);
@@ -56,13 +55,13 @@ function CreateClass() {
   const validate = (values) => {
     const errors = {};
     if (!values.level) {
-      errors.name = 'Level is required!';
+      errors.level = 'Level is required!';
     }
     if (!values.name) {
-      errors.email = 'Class Name is required!';
+      errors.name = 'Class Name is required!';
     }
-    if (!values.TeacherId) {
-      errors.email = 'Teacher is required!';
+    if (!values.formTeacher) {
+      errors.formTeacher = 'Teacher is required!';
     }
     return errors;
   };
@@ -72,11 +71,19 @@ function CreateClass() {
       title="Add Class"
       handleClick={handleSubmit}
       showSubmitButton={true}
+      modelName="class"
     >
+      <pre>{JSON.stringify(formValues)}</pre>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Class Level</Form.Label>
-          <Form.Select size="lg" name="level" onChange={handleChange}>
+          <Form.Select
+            size="lg"
+            name="level"
+            onChange={handleChange}
+            isInvalid={formErrors.level}
+            id="custom-validation"
+          >
             <option value="" disabled selected hidden>
               Select a level
             </option>
@@ -91,25 +98,36 @@ function CreateClass() {
         <Form.Group className="mb-3">
           <Form.Label>Class Name</Form.Label>
           <Form.Control
-            type="select"
             size="lg"
             placeholder="Class Name"
             name="name"
             onChange={handleChange}
+            isInvalid={formErrors.name}
+            id="custom-validation"
           />
-          <p className="errorText">{formErrors.name}</p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.name}
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Form Teacher</Form.Label>
-          <Form.Select size="lg" name="TeacherId" onChange={handleChange}>
+          <Form.Select
+            size="lg"
+            name="formTeacher"
+            onChange={handleChange}
+            isInvalid={formErrors.formTeacher}
+            id="custom-validation"
+          >
             <option value="" disabled selected hidden>
               Assign a form teacher
             </option>
             {teacherList.map((val) => {
-              return <option value={val.id}>{val.name}</option>;
+              return <option value={val.email}>{val.name}</option>;
             })}
           </Form.Select>
-          <p className="errorText">{formErrors.TeacherId}</p>
+          <Form.Control.Feedback type="invalid">
+            {formErrors.TeacherId}
+          </Form.Control.Feedback>
         </Form.Group>
       </Form>
     </CustomCard>

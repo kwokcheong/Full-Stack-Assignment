@@ -6,15 +6,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      subjectName: {
+      subject: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
-      work_contact: {
+      contactNumber: {
         type: DataTypes.INTEGER(1),
         allowNull: false,
       },

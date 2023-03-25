@@ -3,7 +3,10 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 function CustomCard(props) {
-  const { title, handleClick, showAddButton, showSubmitButton } = props;
+  const { title, handleClick, showAddButton, showSubmitButton, modelName } =
+    props;
+  const addBtnText = modelName === 'teacher' ? '+ Add Teacher' : '+ Add Class';
+  const submitBtnText = modelName === 'teacher' ? 'Add Teacher' : 'Add Class';
 
   return (
     <div className="container" style={{ minWidth: '100%' }}>
@@ -29,7 +32,7 @@ function CustomCard(props) {
                 style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
                 onClick={handleClick}
               >
-                + Add Teacher
+                {addBtnText}
               </Button>
             )}
           </div>
@@ -52,7 +55,7 @@ function CustomCard(props) {
             style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
             onClick={handleClick}
           >
-            Add Teacher
+            {submitBtnText}
           </Button>
         )}
       </div>
