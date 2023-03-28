@@ -1,0 +1,19 @@
+{
+  "name": "full-stack-assignment",
+  "version": "1.0.0",
+  "description": "Full stack application for tech challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd server && npm run start & cd client && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwokcheong/Full-Stack-Assignment.git"
+  },
+  "author": "Kwok Cheong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwokcheong/Full-Stack-Assignment/issues"
+  },
+  "homepage": "https://github.com/kwokcheong/Full-Stack-Assignment#readme"
+}
