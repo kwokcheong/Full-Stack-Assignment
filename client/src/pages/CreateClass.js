@@ -5,6 +5,13 @@ import CustomCard from './CustomCard';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
+import {
+  FormControl,
+  FormHelperText,
+  OutlinedInput,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 function CreateClass() {
   const initialValues = {
@@ -124,6 +131,18 @@ function CreateClass() {
     return errors;
   };
 
+  // For Material UI Dropdown
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
   return (
     <CustomCard
       title="Add Class"
@@ -134,69 +153,95 @@ function CreateClass() {
       <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Class Level</Form.Label>
-          <Form.Select
-            size="lg"
-            name="level"
-            onChange={handleChange}
-            isInvalid={formErrors.level}
-            id={
-              isLevelPlaceholder
-                ? 'custom-validation-placeholder'
-                : 'custom-validation'
-            }
-          >
-            <option value="" disabled selected hidden>
-              Select a class level
-            </option>
-            {classLevelList.map((val) => {
-              return <option value={val}>{val}</option>;
-            })}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.level}
-          </Form.Control.Feedback>
+          <FormControl fullWidth error={formErrors.level}>
+            <Select
+              size="lg"
+              name="level"
+              MenuProps={MenuProps}
+              value={formValues.level}
+              onChange={handleChange}
+              error={formErrors.level}
+              id={
+                isLevelPlaceholder
+                  ? 'custom-validation-placeholder'
+                  : 'custom-validation'
+              }
+              displayEmpty
+            >
+              <MenuItem value="" disabled hidden>
+                Select a Subject
+              </MenuItem>
+              {classLevelList.map((val) => {
+                return (
+                  <MenuItem key={val} value={val}>
+                    {val}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            {formErrors.level && (
+              <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+                {formErrors.level}
+              </FormHelperText>
+            )}
+          </FormControl>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Class Name</Form.Label>
-          <Form.Control
-            size="lg"
-            placeholder="Class Name"
-            name="name"
-            onChange={handleChange}
-            isInvalid={formErrors.name}
-            id="custom-validation"
-          />
-          <Form.Control.Feedback type="invalid">
-            {formErrors.name}
-          </Form.Control.Feedback>
+          <FormControl fullWidth error={formErrors.name}>
+            <OutlinedInput
+              type="name"
+              name="name"
+              placeholder="Class Name"
+              onChange={handleChange}
+              error={formErrors.name}
+            />
+          </FormControl>
+          {formErrors.name && (
+            <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+              {formErrors.name}
+            </FormHelperText>
+          )}
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Form Teacher</Form.Label>
-          <Form.Select
-            size="lg"
-            name="teacherEmail"
-            onChange={handleChange}
-            isInvalid={formErrors.teacherEmail}
-            id={
-              isTeacherPlaceholder
-                ? 'custom-validation-placeholder'
-                : 'custom-validation'
-            }
-          >
-            <option value="" disabled selected hidden>
-              Assign a form teacher
-            </option>
-            {teacherList.length > 0 ? (
-              teacherList.map((val) => {
-                return <option value={val.email}>{val.name}</option>;
-              })
-            ) : (
-              <option value="">No existing teachers.</option>
+          <FormControl fullWidth error={formErrors.teacherEmail}>
+            <Select
+              size="lg"
+              name="teacherEmail"
+              MenuProps={MenuProps}
+              value={formValues.teacherEmail}
+              onChange={handleChange}
+              error={formErrors.teacherEmail}
+              id={
+                isTeacherPlaceholder
+                  ? 'custom-validation-placeholder'
+                  : 'custom-validation'
+              }
+              displayEmpty
+            >
+              <MenuItem value="" disabled hidden>
+                Assign a form teacher
+              </MenuItem>
+              {teacherList.length > 0 ? (
+                teacherList.map((val) => {
+                  return (
+                    <MenuItem key={val.email} value={val.email}>
+                      {val.name}
+                    </MenuItem>
+                  );
+                })
+              ) : (
+                <MenuItem value="">No existing teachers.</MenuItem>
+              )}
+              ;
+            </Select>
+            {formErrors.teacherEmail && (
+              <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+                {formErrors.teacherEmail}
+              </FormHelperText>
             )}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.teacherEmail}
-          </Form.Control.Feedback>
+          </FormControl>
         </Form.Group>
       </Form>
     </CustomCard>

@@ -5,9 +5,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import CustomCard from './CustomCard';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import { FormControl, FormHelperText, OutlinedInput } from '@mui/material';
+import {
+  FormControl,
+  FormHelperText,
+  OutlinedInput,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 function CreateTeacher() {
   const initialValues = {
@@ -168,7 +172,7 @@ function CreateTeacher() {
               }
               displayEmpty
             >
-              <MenuItem value="" disabled>
+              <MenuItem value="" disabled hidden>
                 Select a Subject
               </MenuItem>
               {mainSubjectList.map((val) => {
