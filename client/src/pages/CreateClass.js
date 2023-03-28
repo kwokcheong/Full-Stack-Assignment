@@ -10,7 +10,7 @@ function CreateClass() {
   const initialValues = {
     level: '',
     name: '',
-    formTeacher: '',
+    teacherEmail: '',
   };
 
   const classLevelList = [
@@ -60,8 +60,8 @@ function CreateClass() {
     if (!values.name) {
       errors.name = 'Class Name is required!';
     }
-    if (!values.formTeacher) {
-      errors.formTeacher = 'Teacher is required!';
+    if (!values.teacherEmail) {
+      errors.teacherEmail = 'Teacher is required!';
     }
     return errors;
   };
@@ -113,20 +113,24 @@ function CreateClass() {
           <Form.Label>Form Teacher</Form.Label>
           <Form.Select
             size="lg"
-            name="formTeacher"
+            name="teacherEmail"
             onChange={handleChange}
-            isInvalid={formErrors.formTeacher}
+            isInvalid={formErrors.teacherEmail}
             id="custom-validation"
           >
             <option value="" disabled selected hidden>
               Assign a form teacher
             </option>
-            {teacherList.map((val) => {
-              return <option value={val.email}>{val.name}</option>;
-            })}
+            {teacherList.length > 0 ? (
+              teacherList.map((val) => {
+                return <option value={val.email}>{val.name}</option>;
+              })
+            ) : (
+              <option value="">NO TEACHER U GOOTA ADD</option>
+            )}
           </Form.Select>
           <Form.Control.Feedback type="invalid">
-            {formErrors.TeacherId}
+            {formErrors.teacherEmail}
           </Form.Control.Feedback>
         </Form.Group>
       </Form>

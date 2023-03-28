@@ -1,16 +1,14 @@
-const e = require('cors');
 const { Classes, Teachers } = require('../models');
 
-/*
-ShowClasses equivalent SQL Query:
+/*ShowClasses equivalent SQL Query:
 ```
 SELECT cl.level, cl.name, tch.name as formTeacher FROM Classes cl 
 INNER JOIN Teachers tch ON cl.TeacherId = tch.id;
 ...or...
 SELECT cl.level, cl.name, tch.name as formTeacher FROM Classes cl, Teachers tch
 WHERE cl.TeacherId = tch.id;
-```
-*/
+```*/
+
 const showClasses = async (req, res) => {
   try {
     const listOfClasses = await Classes.findAll({
@@ -23,31 +21,31 @@ const showClasses = async (req, res) => {
       ],
     });
 
-    const formattedClassesJson = listOfClasses.map((val) => {
+    const formattedResponse = listOfClasses.map((val) => {
       return {
-        level: val.level,
-        name: val.name,
-        formTeacher: { name: val.Teacher.name },
+        level: String(val.level),
+        name: String(val.name),
+        formTeacher: { name: String(val.Teacher.name) },
       };
     });
 
-    res.json({ data: formattedClassesJson });
+    res.json({ data: formattedResponse });
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
 };
 
 const insertClasses = async (req, res) => {
-  const { level, name, formTeacher } = req.body;
+  const { level, name, teacherEmail } = req.body;
 
   try {
     const teacher = await Teachers.findOne({
       where: {
-        email: formTeacher,
+        email: teacherEmail,
       },
     });
     if (!teacher) {
-      return res.status(404).json({ error: 'Teacher not found' });
+      res.status(400).json({ error: 'Teacher not found' });
     } else {
       const classInfo = {
         level: level,
@@ -56,10 +54,10 @@ const insertClasses = async (req, res) => {
       };
 
       await Classes.create(classInfo);
-      res.json(classInfo);
+      res.status(201).json({ message: 'Class created successfully' });
     }
-  } catch {
-    res.status(500).json({ error: 'Error creating class' });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 };
 

@@ -18,17 +18,21 @@ function ViewClass() {
     });
   }, []);
 
-  console.log(classList);
-
   const handleAddClassesClick = () => {
     navigate('/createClass');
   };
+
+  const shouldShowAddButton = (classList) => {
+    return classList.length > 0;
+  };
+
+  const showAddButton = shouldShowAddButton(classList);
 
   return (
     <CustomCard
       title="Classes"
       handleClick={handleAddClassesClick}
-      showAddButton={true}
+      showAddButton={showAddButton}
       modelName="class"
     >
       {classList.length > 0 ? (
@@ -55,15 +59,19 @@ function ViewClass() {
           </tbody>
         </Table>
       ) : (
-        <div>
-          No teachers found
+        <div
+          className="container d-flex flex-column align-items-center justify-content-center"
+          style={{ minHeight: '65vh' }}
+        >
+          <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+            <b>There are no existing classes yet.</b>
+          </div>
           <Button
             variant="primary"
-            className="float-end"
             style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
             onClick={handleAddClassesClick}
           >
-            + Add Teacher
+            + Add Classes
           </Button>
         </div>
       )}

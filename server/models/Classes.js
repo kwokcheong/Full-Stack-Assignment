@@ -5,10 +5,21 @@ module.exports = (sequelize, DataTypes) => {
       level: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Class level cannot be empty',
+          },
+        },
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
+        validate: {
+          notEmpty: {
+            msg: 'Class name cannot be empty',
+          },
+        },
       },
     },
     {
@@ -20,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     Classes.belongsTo(models.Teachers, {
       foreignKey: {
         allowNull: false,
+        unique: true,
       },
       as: 'Teacher',
     });

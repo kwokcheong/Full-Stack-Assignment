@@ -18,6 +18,12 @@ body, html {
   background-image: none;
 }
 
-.errorText {
-  color: red;
+#custom-outline-btn {
+  color: #135BB4;
+  background-color: transparent;
+  border-color: #135BB4;
+}
+
+#custom-outline-btn:hover {
+  background-color: transparent;
 }
