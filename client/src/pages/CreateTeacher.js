@@ -79,6 +79,7 @@ function CreateTeacher() {
 
   const validate = (values) => {
     const errors = {};
+    const contactNoRegex = /^[1-9]\d*$/;
     const emailRegex =
       /^[-!#$%&'*+0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+0-9=?A-Z^_a-z`{|}~]){0,63}@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$/;
     if (!values.name) {
@@ -102,6 +103,8 @@ function CreateTeacher() {
       errors.contactNumber = 'Work Contact Number must be more than 8 digits';
     } else if (values.contactNumber.toString().length > 10) {
       errors.contactNumber = 'Work Contact Number must be less than 10 digits';
+    } else if (!contactNoRegex.test(values.contactNumber)) {
+      errors.contactNumber = 'Invalid Work Contact Number';
     }
     return errors;
   };
