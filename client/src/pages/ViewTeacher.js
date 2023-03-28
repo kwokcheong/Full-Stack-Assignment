@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
 import CustomCard from './CustomCard';
 import Button from 'react-bootstrap/Button';
+import { Plus } from 'react-bootstrap-icons';
 
 function ViewTeacher() {
   const [teacherList, setTeacherList] = useState([]);
@@ -75,7 +76,11 @@ function ViewTeacher() {
             style={{ marginTop: '20px', backgroundColor: '#135BB4' }}
             onClick={handleAddTeacherClick}
           >
-            + Add Teachers
+            <Plus
+              size={20}
+              style={{ marginBottom: '2px', marginRight: '5px' }}
+            />
+            Add Teachers
           </Button>
         </div>
       )}

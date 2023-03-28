@@ -14,10 +14,6 @@ body, html {
   padding-top: 100px;
 }
 
-#hello {
-  color: grey;
-}
-
 #custom-validation-placeholder {
   color: grey;
 }
@@ -43,6 +39,7 @@ body, html {
 .custom-width {
   width: 40%;
 }
+
 
 @media (max-width: 768px) {
   .custom-width {

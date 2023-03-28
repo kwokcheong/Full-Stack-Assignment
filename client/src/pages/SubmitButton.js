@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'react-bootstrap-icons';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../App.css';
 
@@ -24,6 +25,14 @@ function SubmitButton(props) {
             marginRight: '20px',
           }}
         >
+          <ArrowLeft
+            size={15}
+            style={{
+              marginRight: '5px',
+              marginBottom: '3px',
+              marginLeft: '0px',
+            }}
+          />
           Back
         </Button>
       )}
