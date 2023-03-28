@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import CustomCard from './CustomCard';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -205,14 +206,14 @@ function CreateClass() {
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Form Teacher</Form.Label>
-          <FormControl fullWidth error={formErrors.teacherEmail}>
+          <FormControl fullWidth error={Boolean(formErrors.teacherEmail)}>
             <Select
               size="lg"
               name="teacherEmail"
               MenuProps={MenuProps}
               value={formValues.teacherEmail}
               onChange={handleChange}
-              error={formErrors.teacherEmail}
+              error={Boolean(formErrors.teacherEmail)}
               id={
                 isTeacherPlaceholder
                   ? 'custom-validation-placeholder'
@@ -232,9 +233,24 @@ function CreateClass() {
                   );
                 })
               ) : (
-                <MenuItem value="">No existing teachers.</MenuItem>
+                <>
+                  <MenuItem value="">
+                    <div>
+                      <p style={{ margin: '0px' }}>No existing teachers.</p>
+                      <a
+                        href="/createTeacher"
+                        style={{
+                          color: 'purple',
+                          textDecoration: 'none',
+                          margin: '0px',
+                        }}
+                      >
+                        Add a teacher
+                      </a>
+                    </div>
+                  </MenuItem>
+                </>
               )}
-              ;
             </Select>
             {formErrors.teacherEmail && (
               <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
