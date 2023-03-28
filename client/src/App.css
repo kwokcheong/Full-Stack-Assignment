@@ -20,7 +20,7 @@ body, html {
 }
 
 #custom-validation-placeholder {
-  color: grey;
+  color: #a4a4a4;
 }
 
 #custom-validation-placeholder.is-invalid {
