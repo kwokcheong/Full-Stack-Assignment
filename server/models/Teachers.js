@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
           notEmpty: {
             msg: 'Teacher name cannot be empty',
@@ -31,11 +32,15 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       contactNumber: {
-        type: DataTypes.INTEGER(1),
+        type: DataTypes.STRING(10),
         allowNull: false,
         validate: {
           notEmpty: {
             msg: 'Teacher contact cannot be empty',
+          },
+          len: {
+            args: [8, 10],
+            msg: 'Teacher contact should between 8 - 10 characters',
           },
         },
       },

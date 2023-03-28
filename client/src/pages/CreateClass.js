@@ -24,16 +24,37 @@ function CreateClass() {
 
   const [formValues, setFormValues] = useState(initialValues);
   const [teacherList, setTeacherList] = useState([]);
+  const [classList, setClassList] = useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/teachers').then((response) => {
-      const teacherRecord = response.data;
-      setTeacherList(teacherRecord.data);
-    });
+    const fetchTeacherList = async () => {
+      try {
+        const response = await Axios.get('http://localhost:3001/api/teachers');
+        const teacherRecord = response.data;
+        setTeacherList(teacherRecord.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
+    const fetchClassList = async () => {
+      try {
+        const response = await Axios.get('http://localhost:3001/api/classes');
+        const classesRecord = response.data;
+        setClassList(classesRecord.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTeacherList();
+    fetchClassList();
+  }, []);
+
+  useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       Axios.post('http://localhost:3001/api/classes', formValues).then(() => {
         navigate('/viewClass');
@@ -53,16 +74,33 @@ function CreateClass() {
   };
 
   const validate = (values) => {
+    const selectedTeacher = teacherList.find(
+      (teacher) => teacher.email === values.teacherEmail
+    );
+
     const errors = {};
     if (!values.level) {
-      errors.level = 'Level is required!';
+      errors.level = 'Level is required';
     }
     if (!values.name) {
-      errors.name = 'Class Name is required!';
+      errors.name = 'Class name is required';
     }
     if (!values.teacherEmail) {
-      errors.teacherEmail = 'Teacher is required!';
+      errors.teacherEmail = 'Teacher is required';
     }
+
+    for (const record of classList) {
+      if (record.name === values.name) {
+        errors.name = 'Class name already exists';
+      }
+
+      if (selectedTeacher) {
+        if (record.formTeacher.name === selectedTeacher.name) {
+          errors.teacherEmail = 'This teacher has already been assigned';
+        }
+      }
+    }
+
     return errors;
   };
 
@@ -73,7 +111,6 @@ function CreateClass() {
       showSubmitButton={true}
       modelName="class"
     >
-      <pre>{JSON.stringify(formValues)}</pre>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Class Level</Form.Label>
@@ -126,7 +163,7 @@ function CreateClass() {
                 return <option value={val.email}>{val.name}</option>;
               })
             ) : (
-              <option value="">NO TEACHER U GOOTA ADD</option>
+              <option value="">No existing teachers.</option>
             )}
           </Form.Select>
           <Form.Control.Feedback type="invalid">

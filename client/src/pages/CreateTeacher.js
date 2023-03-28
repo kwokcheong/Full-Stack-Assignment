@@ -20,7 +20,10 @@ function CreateTeacher() {
     'Mathematics',
     'Science',
     'Art',
+    'Music',
     'Physical Education',
+    'Social Studies',
+    'Character and Citizenship Education',
   ];
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -55,6 +58,10 @@ function CreateTeacher() {
     setIsSubmit(true);
   };
 
+  const nameExists = (name) => {
+    return teacherList.some((teacher) => teacher.name === name);
+  };
+
   const emailExists = (email) => {
     return teacherList.some((teacher) => teacher.email === email);
   };
@@ -62,9 +69,11 @@ function CreateTeacher() {
   const validate = (values) => {
     const errors = {};
     const emailRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      /^[-!#$%&'*+0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+0-9=?A-Z^_a-z`{|}~]){0,63}@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$/;
     if (!values.name) {
       errors.name = 'Name is required!';
+    } else if (nameExists(values.name)) {
+      errors.name = 'This name already exists';
     }
     if (!values.email) {
       errors.email = 'Email is required!';

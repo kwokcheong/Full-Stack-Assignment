@@ -45,7 +45,7 @@ const insertClasses = async (req, res) => {
       },
     });
     if (!teacher) {
-      res.status(400).json({ error: 'Teacher not found' });
+      res.status(400).json({ error: 'Teacher email not found' });
     } else {
       const classInfo = {
         level: level,
@@ -57,7 +57,8 @@ const insertClasses = async (req, res) => {
       res.status(201).json({ message: 'Class created successfully' });
     }
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    const error = err.errors ? err.errors[0].message : 'Server Error';
+    res.status(400).json({ error: error });
   }
 };
 
