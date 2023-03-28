@@ -14,6 +14,18 @@ body, html {
   padding-top: 100px;
 }
 
+#hello {
+  color: grey;
+}
+
+#custom-validation-placeholder {
+  color: grey;
+}
+
+#custom-validation-placeholder.is-invalid {
+  background-image: none;
+}
+
 #custom-validation.is-invalid {
   background-image: none;
 }
@@ -26,4 +38,14 @@ body, html {
 
 #custom-outline-btn:hover {
   background-color: transparent;
+}
+
+.custom-width {
+  width: 40%;
+}
+
+@media (max-width: 768px) {
+  .custom-width {
+    width: 100%;
+  }
 }

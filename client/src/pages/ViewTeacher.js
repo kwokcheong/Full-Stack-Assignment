@@ -12,10 +12,12 @@ function ViewTeacher() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/teachers').then((response) => {
-      const record = response.data;
-      setTeacherList(record.data);
-    });
+    Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
+      (response) => {
+        const record = response.data;
+        setTeacherList(record.data);
+      }
+    );
   }, []);
 
   const handleAddTeacherClick = () => {

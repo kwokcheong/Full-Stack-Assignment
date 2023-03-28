@@ -30,18 +30,24 @@ function CreateTeacher() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [teacherList, setTeacherList] = useState({});
+  const [isSubjectPlaceholder, setIsSubjectPlaceholder] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/teachers').then((response) => {
-      const record = response.data;
-      setTeacherList(record.data);
-    });
+    Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
+      (response) => {
+        const record = response.data;
+        setTeacherList(record.data);
+      }
+    );
   }, []);
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      Axios.post('http://localhost:3001/api/teachers', formValues).then(() => {
+      Axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/teachers`,
+        formValues
+      ).then(() => {
         navigate('/viewTeacher');
       });
     }
@@ -49,6 +55,11 @@ function CreateTeacher() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'subject' && value !== '') {
+      setIsSubjectPlaceholder(false);
+    } else if (name === 'subject' && value === '') {
+      setIsSubjectPlaceholder(true);
+    }
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -102,7 +113,7 @@ function CreateTeacher() {
       showSubmitButton={true}
       modelName="teacher"
     >
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -125,7 +136,11 @@ function CreateTeacher() {
             name="subject"
             onChange={handleChange}
             isInvalid={formErrors.subject}
-            id="custom-validation"
+            id={
+              isSubjectPlaceholder
+                ? 'custom-validation-placeholder'
+                : 'custom-validation'
+            }
           >
             <option value="" disabled selected hidden>
               Select a Subject

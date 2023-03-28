@@ -27,12 +27,16 @@ function CreateClass() {
   const [classList, setClassList] = useState([]);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLevelPlaceholder, setIsLevelPlaceholder] = useState(true);
+  const [isTeacherPlaceholder, setIsTeacherPlaceholder] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTeacherList = async () => {
       try {
-        const response = await Axios.get('http://localhost:3001/api/teachers');
+        const response = await Axios.get(
+          `${process.env.REACT_APP_BASE_URL}/api/teachers`
+        );
         const teacherRecord = response.data;
         setTeacherList(teacherRecord.data);
       } catch (error) {
@@ -42,7 +46,9 @@ function CreateClass() {
 
     const fetchClassList = async () => {
       try {
-        const response = await Axios.get('http://localhost:3001/api/classes');
+        const response = await Axios.get(
+          `${process.env.REACT_APP_BASE_URL}/api/classes`
+        );
         const classesRecord = response.data;
         setClassList(classesRecord.data);
       } catch (error) {
@@ -56,7 +62,10 @@ function CreateClass() {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      Axios.post('http://localhost:3001/api/classes', formValues).then(() => {
+      Axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/classes`,
+        formValues
+      ).then(() => {
         navigate('/viewClass');
       });
     }
@@ -64,6 +73,16 @@ function CreateClass() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'level' && value !== '') {
+      setIsLevelPlaceholder(false);
+    } else if (name === 'level' && value === '') {
+      setIsLevelPlaceholder(true);
+    }
+    if (name === 'teacherEmail' && value !== '') {
+      setIsTeacherPlaceholder(false);
+    } else if (name === 'teacherEmail' && value === '') {
+      setIsTeacherPlaceholder(true);
+    }
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -111,7 +130,7 @@ function CreateClass() {
       showSubmitButton={true}
       modelName="class"
     >
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Class Level</Form.Label>
           <Form.Select
@@ -119,10 +138,14 @@ function CreateClass() {
             name="level"
             onChange={handleChange}
             isInvalid={formErrors.level}
-            id="custom-validation"
+            id={
+              isLevelPlaceholder
+                ? 'custom-validation-placeholder'
+                : 'custom-validation'
+            }
           >
             <option value="" disabled selected hidden>
-              Select a level
+              Select a class level
             </option>
             {classLevelList.map((val) => {
               return <option value={val}>{val}</option>;
@@ -153,7 +176,11 @@ function CreateClass() {
             name="teacherEmail"
             onChange={handleChange}
             isInvalid={formErrors.teacherEmail}
-            id="custom-validation"
+            id={
+              isTeacherPlaceholder
+                ? 'custom-validation-placeholder'
+                : 'custom-validation'
+            }
           >
             <option value="" disabled selected hidden>
               Assign a form teacher

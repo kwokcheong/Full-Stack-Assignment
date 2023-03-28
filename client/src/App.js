@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
 import CreateTeacher from './pages/CreateTeacher';
 import ViewTeacher from './pages/ViewTeacher';
 import CreateClass from './pages/CreateClass';
@@ -15,7 +14,7 @@ function App() {
         <NavigationBar />
         <div className="container" id="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<ViewClass />} />
             <Route path="/viewTeacher" element={<ViewTeacher />} />
             <Route path="/createTeacher" element={<CreateTeacher />} />
             <Route path="/viewClass" element={<ViewClass />} />

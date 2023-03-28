@@ -12,10 +12,12 @@ function ViewClass() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/classes').then((response) => {
-      const record = response.data;
-      setClassList(record.data);
-    });
+    Axios.get(`${process.env.REACT_APP_ENDPOINT}/api/classes`).then(
+      (response) => {
+        const record = response.data;
+        setClassList(record.data);
+      }
+    );
   }, []);
 
   const handleAddClassesClick = () => {
