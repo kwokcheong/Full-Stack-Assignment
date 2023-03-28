@@ -99,23 +99,24 @@ function CreateClass() {
 
     const errors = {};
     if (!values.level) {
-      errors.level = 'Level is required';
+      errors.level = 'Level is required.';
     }
     if (!values.name) {
-      errors.name = 'Class name is required';
+      errors.name = 'Class name is required.';
     }
     if (!values.teacherEmail) {
-      errors.teacherEmail = 'Teacher is required';
+      errors.teacherEmail = 'Teacher is required.';
     }
 
     for (const record of classList) {
       if (record.name === values.name) {
-        errors.name = 'Class name already exists';
+        errors.name = 'This class name already exists.';
       }
 
       if (selectedTeacher) {
         if (record.formTeacher.name === selectedTeacher.name) {
-          errors.teacherEmail = 'This teacher has already been assigned';
+          errors.teacherEmail =
+            'This teacher has already been assigned to a class.';
         }
       }
     }

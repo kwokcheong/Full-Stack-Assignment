@@ -83,28 +83,30 @@ function CreateTeacher() {
     const emailRegex =
       /^[-!#$%&'*+0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+0-9=?A-Z^_a-z`{|}~]){0,63}@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$/;
     if (!values.name) {
-      errors.name = 'Name is required!';
+      errors.name = 'Name is required.';
     } else if (nameExists(values.name)) {
-      errors.name = 'This name already exists';
+      errors.name = 'This name already exists.';
     }
     if (!values.email) {
-      errors.email = 'Email is required!';
+      errors.email = 'Email is required.';
     } else if (emailExists(values.email)) {
-      errors.email = 'This email already exists!';
+      errors.email = 'This email already exists.';
     } else if (!emailRegex.test(values.email)) {
-      errors.email = 'This is not a valid Email!';
+      errors.email = 'This is not a valid Email.';
     }
     if (!values.subject) {
-      errors.subject = 'Subject is required!';
+      errors.subject = 'Subject is required.';
     }
     if (!values.contactNumber) {
-      errors.contactNumber = 'Work Contact Number is required!';
+      errors.contactNumber = 'Work Contact Number is required.';
     } else if (values.contactNumber.toString().length < 8) {
-      errors.contactNumber = 'Work Contact Number must be more than 8 digits';
+      errors.contactNumber =
+        'This Work Contact Number must be more than 8 digits.';
     } else if (values.contactNumber.toString().length > 10) {
-      errors.contactNumber = 'Work Contact Number must be less than 10 digits';
+      errors.contactNumber =
+        'This Work Contact Number must be less than 10 digits.';
     } else if (!contactNoRegex.test(values.contactNumber)) {
-      errors.contactNumber = 'Invalid Work Contact Number';
+      errors.contactNumber = 'This Work Contact Number is invalid.';
     }
     return errors;
   };
@@ -178,7 +180,7 @@ function CreateTeacher() {
         <Form.Group className="mb-3">
           <Form.Label>Work Contact Number</Form.Label>
           <Form.Control
-            type="number"
+            type="text"
             size="lg"
             placeholder="Work contact number"
             name="contactNumber"
