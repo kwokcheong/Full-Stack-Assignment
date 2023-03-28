@@ -14,6 +14,11 @@ body, html {
   padding-top: 100px;
 }
 
+.match-react-bootstrap {
+  font-weight: 400;
+  border: 1px solid #ced4da;
+}
+
 #custom-validation-placeholder {
   color: grey;
 }

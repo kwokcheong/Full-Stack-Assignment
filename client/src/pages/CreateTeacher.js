@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import CustomCard from './CustomCard';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import { FormControl, FormHelperText, OutlinedInput } from '@mui/material';
 
 function CreateTeacher() {
   const initialValues = {
@@ -106,9 +109,21 @@ function CreateTeacher() {
       errors.contactNumber =
         'This Work Contact Number must be less than 10 digits.';
     } else if (!contactNoRegex.test(values.contactNumber)) {
-      errors.contactNumber = 'This Work Contact Number is invalid.';
+      errors.contactNumber = 'This work contact number is invalid.';
     }
     return errors;
+  };
+
+  // For Material UI Dropdown
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
   };
 
   return (
@@ -121,76 +136,89 @@ function CreateTeacher() {
       <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="name"
-            size="lg"
-            placeholder="Name"
-            name="name"
-            onChange={handleChange}
-            isInvalid={formErrors.name}
-            id="custom-validation"
-          />
-          <Form.Control.Feedback type="invalid">
-            {formErrors.name}
-          </Form.Control.Feedback>
+          <FormControl fullWidth error={formErrors.name}>
+            <OutlinedInput
+              type="name"
+              name="name"
+              placeholder="Name"
+              onChange={handleChange}
+              error={formErrors.name}
+            />
+          </FormControl>
+          {formErrors.name && (
+            <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+              {formErrors.name}
+            </FormHelperText>
+          )}
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Subject</Form.Label>
-          <Form.Select
-            size="lg"
-            name="subject"
-            onChange={handleChange}
-            isInvalid={formErrors.subject}
-            id={
-              isSubjectPlaceholder
-                ? 'custom-validation-placeholder'
-                : 'custom-validation'
-            }
-          >
-            <option value="" disabled selected hidden>
-              Select a Subject
-            </option>
-            {mainSubjectList.map((val, i) => {
-              return (
-                <option key={i} value={val}>
-                  {val}
-                </option>
-              );
-            })}
-          </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.subject}
-          </Form.Control.Feedback>
+          <FormControl fullWidth error={formErrors.subject}>
+            <Select
+              size="lg"
+              name="subject"
+              MenuProps={MenuProps}
+              value={formValues.subject}
+              onChange={handleChange}
+              error={formErrors.subject}
+              id={
+                isSubjectPlaceholder
+                  ? 'custom-validation-placeholder'
+                  : 'custom-validation'
+              }
+              displayEmpty
+            >
+              <MenuItem value="" disabled>
+                Select a Subject
+              </MenuItem>
+              {mainSubjectList.map((val) => {
+                return (
+                  <MenuItem key={val} value={val}>
+                    {val}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+            {formErrors.subject && (
+              <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+                {formErrors.subject}
+              </FormHelperText>
+            )}
+          </FormControl>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            size="lg"
-            placeholder="Email address"
-            name="email"
-            onChange={handleChange}
-            isInvalid={formErrors.email}
-            id="custom-validation"
-          />
-          <Form.Control.Feedback type="invalid">
-            {formErrors.email}
-          </Form.Control.Feedback>
+          <FormControl fullWidth error={formErrors.email}>
+            <OutlinedInput
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              onChange={handleChange}
+              error={formErrors.email}
+            />
+          </FormControl>
+          {formErrors.email && (
+            <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+              {formErrors.email}
+            </FormHelperText>
+          )}
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Work Contact Number</Form.Label>
-          <Form.Control
-            type="text"
-            size="lg"
-            placeholder="Work contact number"
-            name="contactNumber"
-            onChange={handleChange}
-            isInvalid={formErrors.contactNumber}
-            id="custom-validation"
-          />
-          <Form.Control.Feedback type="invalid">
-            {formErrors.contactNumber}
-          </Form.Control.Feedback>
+          <FormControl fullWidth error={formErrors.contactNumber}>
+            <OutlinedInput
+              type="text"
+              name="contactNumber"
+              placeholder="Work contact number"
+              onChange={handleChange}
+              error={formErrors.contactNumber}
+            />
+          </FormControl>
+          {formErrors.contactNumber && (
+            <FormHelperText style={{ marginLeft: '0px', color: 'red' }}>
+              {formErrors.contactNumber}
+            </FormHelperText>
+          )}
         </Form.Group>
       </Form>
     </CustomCard>
