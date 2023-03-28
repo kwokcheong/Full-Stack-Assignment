@@ -93,6 +93,8 @@ function CreateTeacher() {
       errors.name = 'Name is required.';
     } else if (nameExists(values.name)) {
       errors.name = 'This name already exists.';
+    } else if (values.name.length > 200) {
+      errors.name = 'Name is too long.';
     }
     if (!values.email) {
       errors.email = 'Email is required.';
@@ -100,6 +102,8 @@ function CreateTeacher() {
       errors.email = 'This email already exists.';
     } else if (!emailRegex.test(values.email)) {
       errors.email = 'This is not a valid Email.';
+    } else if (values.email.length > 200) {
+      errors.name = 'Email is too long.';
     }
     if (!values.subject) {
       errors.subject = 'Subject is required.';

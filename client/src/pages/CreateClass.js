@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import CustomCard from './CustomCard';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -111,6 +110,8 @@ function CreateClass() {
     }
     if (!values.name) {
       errors.name = 'Class name is required.';
+    } else if (values.name.length > 200) {
+      errors.name = 'Class name is too long.';
     }
     if (!values.teacherEmail) {
       errors.teacherEmail = 'Teacher is required.';
