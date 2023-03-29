@@ -110,7 +110,7 @@ function CreateClass() {
     }
     if (!values.name) {
       errors.name = 'Class name is required.';
-    } else if (values.name.length > 200) {
+    } else if (values.name.length > 256) {
       errors.name = 'Class name is too long.';
     }
     if (!values.teacherEmail) {
