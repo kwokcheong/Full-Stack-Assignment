@@ -136,9 +136,6 @@ Classes page:
 3. (Non API Related) Class name could be a select dropdown
 
 ### How to test Postman
-
-There are 4 endpoints
-
 ##### POST Request: 
 1. `/api/teachers` : This creates a teacher record with the information passed in the body
 
