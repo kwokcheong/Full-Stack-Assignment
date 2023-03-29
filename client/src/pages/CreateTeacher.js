@@ -153,7 +153,6 @@ function CreateTeacher() {
       showSubmitButton={true}
       modelName="teacher"
     >
-      <pre>{JSON.stringify(formValues)}</pre>
       <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
