@@ -1,6 +1,6 @@
 # Full-Stack-Assignment
 
-*Hi! My name is Kwok cheong, you can just call me KC :) I had alot of fun working on this tech challenge and I've learnt and improved alot from this, thank you!!*
+*Hi! My name is Kwok cheong, you can just call me KC :) I had alot of fun working on this tech challenge, it is well designed and thoughtful. Thank you!!*
 
 ![Screenshot 2023-03-29 at 11 07 14 AM](https://user-images.githubusercontent.com/27864374/228416470-12ba08f0-aaf8-481d-a3d1-28402da3cc65.png)
 
@@ -106,7 +106,7 @@ Classes page:
 
 1. /api/classes 
 
-- returning the below JSON body may not provide a useful indentifier to the teacher's table unless name is unique. 
+- returning the below JSON body may not provide a useful identifier to the teacher's table unless name is unique. 
 - Suggest to return more information under the `formTeacher` body to include information `email` or unique identifier `id`
 
 ```
