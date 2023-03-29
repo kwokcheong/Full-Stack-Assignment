@@ -41,22 +41,30 @@ function CreateTeacher() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
-      (response) => {
-        const record = response.data;
-        setTeacherList(record.data);
-      }
-    );
+    try {
+      Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
+        (response) => {
+          const record = response.data;
+          setTeacherList(record.data);
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      Axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/teachers`,
-        formValues
-      ).then(() => {
-        navigate('/viewTeacher');
-      });
+      try {
+        Axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/teachers`,
+          formValues
+        ).then(() => {
+          navigate('/viewTeacher');
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [formErrors, formValues, isSubmit, navigate]);
 

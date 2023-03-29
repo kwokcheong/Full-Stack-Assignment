@@ -69,12 +69,16 @@ function CreateClass() {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      Axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/classes`,
-        formValues
-      ).then(() => {
-        navigate('/viewClass');
-      });
+      try {
+        Axios.post(
+          `${process.env.REACT_APP_BASE_URL}/api/classes`,
+          formValues
+        ).then(() => {
+          navigate('/viewClass');
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   }, [formErrors, formValues, isSubmit, navigate]);
 

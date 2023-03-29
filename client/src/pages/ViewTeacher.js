@@ -13,19 +13,23 @@ function ViewTeacher() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
-      (response) => {
-        const record = response.data;
-        setTeacherList(record.data);
-      }
-    );
+    try {
+      Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
+        (response) => {
+          const record = response.data;
+          setTeacherList(record.data);
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const handleAddTeacherClick = () => {
     navigate('/createTeacher');
   };
 
-  const shouldShowAddButton = (classList) => {
+  const shouldShowAddButton = (teacherList) => {
     return teacherList.length > 0;
   };
 

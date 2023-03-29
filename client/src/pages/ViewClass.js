@@ -13,12 +13,16 @@ function ViewClass() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    Axios.get(`${process.env.REACT_APP_BASE_URL}/api/classes`).then(
-      (response) => {
-        const record = response.data;
-        setClassList(record.data);
-      }
-    );
+    try {
+      Axios.get(`${process.env.REACT_APP_BASE_URL}/api/classes`).then(
+        (response) => {
+          const record = response.data;
+          setClassList(record.data);
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   const handleAddClassesClick = () => {
