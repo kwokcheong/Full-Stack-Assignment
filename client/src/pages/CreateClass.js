@@ -99,7 +99,8 @@ function CreateClass() {
     setIsSubmit(true);
   };
 
-  const onlyWhiteSpaceRegex = /^\s*$/;
+  const WhiteSpaceRegex = /^\s|\s+$/;
+  const nameRegex = /[a-zA-Z]+/;
 
   const validate = (values) => {
     const selectedTeacher = teacherList.find(
@@ -114,8 +115,10 @@ function CreateClass() {
       errors.name = 'Class name is required.';
     } else if (values.name.length > 256) {
       errors.name = 'Class name is too long.';
-    } else if (onlyWhiteSpaceRegex.test(values.name)) {
-      errors.name = 'This name is invalid';
+    } else if (WhiteSpaceRegex.test(values.name)) {
+      errors.name = 'Class name is invalid';
+    } else if (!nameRegex.test(values.name)) {
+      errors.name = 'Class name should at least have an alphabet';
     }
     if (!values.teacherEmail) {
       errors.teacherEmail = 'Teacher is required.';
@@ -156,6 +159,7 @@ function CreateClass() {
       showSubmitButton={true}
       modelName="class"
     >
+      <pre>{JSON.stringify(formValues)}</pre>
       <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Class Level</Form.Label>

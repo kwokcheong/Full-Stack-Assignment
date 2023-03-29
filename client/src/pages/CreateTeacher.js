@@ -87,7 +87,8 @@ function CreateTeacher() {
   const validate = (values) => {
     const errors = {};
     const contactNoRegex = /^[1-9]\d*$/;
-    const onlyWhiteSpaceRegex = /^\s*$/;
+    const nameRegex = /[a-zA-Z]+/;
+    const WhiteSpaceRegex = /^\s|\s+$/;
     const emailRegex =
       /^[-!#$%&'*+0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+0-9=?A-Z^_a-z`{|}~]){0,63}@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$/;
     if (!values.name) {
@@ -96,18 +97,26 @@ function CreateTeacher() {
       errors.name = 'This name already exists.';
     } else if (values.name.length > 256) {
       errors.name = 'Name is too long.';
-    } else if (onlyWhiteSpaceRegex.test(values.name)) {
+    } else if (WhiteSpaceRegex.test(values.name)) {
       errors.name = 'This name is invalid';
+    } else if (!nameRegex.test(values.name)) {
+      errors.name = 'This name should at least have an alphabet';
     }
     if (!values.email) {
       errors.email = 'Email is required.';
+    } else if (
+      values.email[0] === ' ' ||
+      values.email[values.email[values.email.length - 1]] === ' '
+    ) {
+      errors.email = 'This email is invalid';
     } else if (emailExists(values.email)) {
       errors.email = 'This email already exists.';
     } else if (!emailRegex.test(values.email)) {
       errors.email = 'This is not a valid Email.';
     } else if (values.email.length > 256) {
-      errors.name = 'Email is too long.';
+      errors.email = 'Email is too long.';
     }
+
     if (!values.subject) {
       errors.subject = 'Subject is required.';
     }
@@ -144,6 +153,7 @@ function CreateTeacher() {
       showSubmitButton={true}
       modelName="teacher"
     >
+      <pre>{JSON.stringify(formValues)}</pre>
       <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
