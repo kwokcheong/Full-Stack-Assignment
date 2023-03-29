@@ -25,3 +25,4 @@ yarn-error.log*
 #custom
 Full-Stack-Assignment.md
 .env
+config.json

@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "password",
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "admin",
+    "password": "HelloWorld",
+    "database": "PrivateEducation",
+    "host": "privateeducation.c8x33i5yqmej.ap-southeast-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
