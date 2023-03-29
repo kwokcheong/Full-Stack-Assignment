@@ -157,7 +157,6 @@ function CreateClass() {
       title="Add Class"
       handleClick={handleSubmit}
       showSubmitButton={true}
-      s
       modelName="class"
     >
       <Form onSubmit={handleSubmit} className="custom-width">
