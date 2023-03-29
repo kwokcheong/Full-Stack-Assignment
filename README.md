@@ -207,3 +207,20 @@ sample response:
     ]
 }
 ```
+
+
+### Areas to improve on / wishlist (reflection for myself)
+
+1. More unit testing
+
+- Dived into coding too fast too soon
+- More unit testing using mocha chai / react testing library :(
+
+2. More Modular/Reusable code 
+
+- Few areas can be made modular, such as modularizing the `react select box`, `text box`
+- Implement a wrapper to pass classes/teachers information down the components. 
+
+3. Deploy onto AWS E2 instance
+
+- Really want to try deployment, I will be trying it out as of writing.
