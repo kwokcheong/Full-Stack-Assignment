@@ -5,7 +5,7 @@ The objective is to create a system that is needed for a private education busin
 *As of writing, app is not deployed yet. Aim is to deploy it on AWS EC2 instance*
 ### How to get started in your local machine
 
-0. Using your terminal, navigate to the filepath of your choice.
+Using your terminal, navigate to the filepath of your choice.
 1. run command `git clone https://github.com/kwokcheong/Full-Stack-Assignment.git`
 2. run command `cd Full-Stack-Assignment`
 3. Downloads:
