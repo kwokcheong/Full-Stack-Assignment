@@ -87,7 +87,7 @@ From your terminal in `Full-Stack-Application` directory...
 
 1. Teacher
     - `name` should be unique, not null, with a character limit less than 256
-    - `subject` should not be null
+    - `subject` should not be null, each teacher only teaches one subject
     - `email` should be unique, not null with a character limit less than 256
     - `contactNumber` character limit 10, frontend validation 8-10 char, not null
 2. Classes
