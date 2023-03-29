@@ -1,4 +1,9 @@
 # Full-Stack-Assignment
+
+*Hi! My name is Kwok cheong, you can just call me KC :) I had alot of fun working on this tech challenge and I've learnt and improved alot from this, thank you!!*
+
+
+
 This is a fullstack assignment using NodeJS, ReactJS and MySQL.
 The objective is to create a system that is needed for a private education business to perform some administrative functions, where administrators can keep track of teachers and their classes.
 
@@ -33,7 +38,7 @@ Using your terminal, navigate to the filepath of your choice.
     - `cd client` -> `npm install`
     - `cd server` -> `npm install`
 
-4. (IMPORTANT) set up `.env` files
+5. !!**IMPORTANT**!! set up `.env` files
 
     - Within the Full-Stack-Assignment folder, there are 2 folders, Server and Client
     
@@ -55,22 +60,29 @@ Using your terminal, navigate to the filepath of your choice.
         REACT_APP_BASE_URL="http://localhost:3001"
         ```
 
-This app runs on nodeJS and ReactJS
+### This app runs on nodeJS and ReactJS
 
-Launch NodeJS:
-From your terminal...
+1. Launch NodeJS:
+From your terminal, navigate to the server directory
 1. `cd Full-Stack-Application`
 2. `cd server`
 3. `npm start`
 
-Open another terminal instance...
-From your terminal...
+2. Open another terminal instance, 
+- Either hit the keyboard shortcut `Command + D` or Manually open a new terminal window
+
+From your terminal, navigate to the client directory
 1. `cd Full-Stack-Application`
 2. `cd client`
 3. `npm start`
 
+3. Alternatively! I made a script to run both at once
+(NOTICE: This is not tested on other devices yet other than macbook pro 14, it may or may not work on other devices. Do use step 1 and 2 if this does not work for you)
 
-- Assumptions made
+From your terminal in `Full-Stack-Application` directory...
+1. `npm start`
+
+### Assumptions made
 
 1. Teacher
     - `name` should be unique, not null, with a character limit less than 256
@@ -89,7 +101,7 @@ Classes page:
 *pending as of writing*
 
 
-- Inputs/suggestions on the API design
+### Inputs/suggestions on the API design
 
 1. /api/classes 
 
@@ -122,4 +134,78 @@ Classes page:
 
 3. (Non API Related) Class name could be a select dropdown
 
+### How to test Postman
 
+There are 4 endpoints
+
+##### POST Request: 
+1. `/api/teachers` : This creates a teacher record with the information passed in the body
+
+sample body:
+```
+{
+  "name": "Mary",
+  "subject": "Mathematics",
+  "email": "teachermary@gmail.com",
+  "contactNumber": "68129414"
+}
+```
+
+2. `/api/classes` : This creates a class record with the information passed in the body
+
+sample body:
+```
+{
+  "level": "Primary 1",
+  "name": "Class 1A"
+  "teacherEmail": "teachermary@gmail.com"
+}
+```
+
+##### Get Requests:
+
+sample response:
+```
+{
+  "data" :
+    [
+      {
+        "name": "Mary",
+        "subject": "Mathematics",
+        "email": "teachermary@gmail.com",
+        "contactNumber": "68129414"
+      },
+      {
+        "name": "Ken",
+        "subject": "Mother Tongue Language",
+        "email": "teacherken@gmail.com",
+        "contactNumber": "61824191"
+      }
+    ]
+}
+```
+
+2. `/api/classes` : This creates a class record with the information passed in the body
+
+sample response:
+```
+{
+  "data" :
+    [
+      {
+        "level": "Primary 1",
+        "name": "Class 1A",
+        "formTeacher": {
+          "name": "Mary"
+        }
+      },
+      {
+        "level": "Primary 2",
+        "name": "Class 2B",
+        "formTeacher": {
+          "name": "Ken"
+        }
+      }
+    ]
+}
+```
