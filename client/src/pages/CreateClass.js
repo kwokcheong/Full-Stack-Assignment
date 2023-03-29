@@ -99,6 +99,8 @@ function CreateClass() {
     setIsSubmit(true);
   };
 
+  const onlyWhiteSpaceRegex = /^\s*$/;
+
   const validate = (values) => {
     const selectedTeacher = teacherList.find(
       (teacher) => teacher.email === values.teacherEmail
@@ -112,6 +114,8 @@ function CreateClass() {
       errors.name = 'Class name is required.';
     } else if (values.name.length > 256) {
       errors.name = 'Class name is too long.';
+    } else if (onlyWhiteSpaceRegex.test(values.name)) {
+      errors.name = 'This name is invalid';
     }
     if (!values.teacherEmail) {
       errors.teacherEmail = 'Teacher is required.';

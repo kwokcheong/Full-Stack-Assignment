@@ -87,14 +87,17 @@ function CreateTeacher() {
   const validate = (values) => {
     const errors = {};
     const contactNoRegex = /^[1-9]\d*$/;
+    const onlyWhiteSpaceRegex = /^\s*$/;
     const emailRegex =
       /^[-!#$%&'*+0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+0-9=?A-Z^_a-z`{|}~]){0,63}@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z][a-zA-Z0-9-]{0,22}[a-zA-Z0-9]$/;
     if (!values.name) {
       errors.name = 'Name is required.';
     } else if (nameExists(values.name)) {
       errors.name = 'This name already exists.';
-    } else if (values.name.length > 200) {
+    } else if (values.name.length > 256) {
       errors.name = 'Name is too long.';
+    } else if (onlyWhiteSpaceRegex.test(values.name)) {
+      errors.name = 'This name is invalid';
     }
     if (!values.email) {
       errors.email = 'Email is required.';
@@ -102,7 +105,7 @@ function CreateTeacher() {
       errors.email = 'This email already exists.';
     } else if (!emailRegex.test(values.email)) {
       errors.email = 'This is not a valid Email.';
-    } else if (values.email.length > 200) {
+    } else if (values.email.length > 256) {
       errors.name = 'Email is too long.';
     }
     if (!values.subject) {
