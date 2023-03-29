@@ -157,9 +157,9 @@ function CreateClass() {
       title="Add Class"
       handleClick={handleSubmit}
       showSubmitButton={true}
+      s
       modelName="class"
     >
-      <pre>{JSON.stringify(formValues)}</pre>
       <Form onSubmit={handleSubmit} className="custom-width">
         <Form.Group className="mb-3">
           <Form.Label>Class Level</Form.Label>
