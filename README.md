@@ -9,6 +9,17 @@ This is a fullstack assignment using NodeJS, ReactJS and MySQL.
 The objective is to create a system that is needed for a private education business to perform some administrative functions, where administrators can keep track of teachers and their classes.
 
 *As of writing, app is not deployed yet. Aim is to deploy it on AWS EC2 instance*
+* UPDATE! Successfully deployed on an Ubuntu AWS EC2 instance*
+
+### Deployed site on AWS EC2
+Todo: add documentation for self reference in future
+
+link: http://54.179.97.224/
+API link: http://54.179.97.224:3001/
+
+Example GET Classes: http://54.179.97.224:3001/api/classes
+
+
 ### How to get started in your local machine
 
 Using your terminal, navigate to the filepath of your choice.
