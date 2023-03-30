@@ -10,7 +10,7 @@ The objective is to create a system that is needed for a private education busin
 
 *As of writing, app is not deployed yet. Aim is to deploy it on AWS EC2 instance*
 * UPDATE! Successfully deployed on an Ubuntu AWS EC2 instance*
-
+Notice: undergoing testing now, seeing if config is all ok
 ### Deployed site on AWS EC2
 Todo: add documentation for self reference in future
 
