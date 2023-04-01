@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'react-bootstrap-icons';
 import 'bootstrap/dist/css/bootstrap.css';
-import '../App.css';
+import '../../App.css';
 
 function SubmitButton(props) {
   const { submitBtnText, handleClick, showBackButton, modelName } = props;

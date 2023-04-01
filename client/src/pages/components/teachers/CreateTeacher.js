@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import '../App.css';
+import '../../../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import CustomCard from './CustomCard';
+import CustomCard from '../CustomCard';
 import {
   FormControl,
   FormHelperText,

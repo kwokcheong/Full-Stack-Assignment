@@ -1,8 +1,8 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import logoImg from '../School_Portal.png';
-import '../nav.css';
+import logoImg from '../../School_Portal.png';
+import '../../nav.css';
 import { useEffect, useState } from 'react';
 
 function NavigationBar() {

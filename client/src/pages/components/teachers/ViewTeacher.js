@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import '../App.css';
+import '../../../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
-import CustomCard from './CustomCard';
+import CustomCard from '../CustomCard';
 import Button from 'react-bootstrap/Button';
 import { Plus } from 'react-bootstrap-icons';
 
 function ViewTeacher() {
   const [teacherList, setTeacherList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    try {
-      Axios.get(`${process.env.REACT_APP_BASE_URL}/api/teachers`).then(
-        (response) => {
-          const record = response.data;
-          setTeacherList(record.data);
-        }
-      );
-    } catch (error) {
-      console.error(error);
-    }
+    const fetchTeacherData = async () => {
+      try {
+        const response = await Axios.get(
+          `${process.env.REACT_APP_BASE_URL}/api/teachers`
+        );
+        const record = response.data;
+        setTeacherList(record.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTeacherData();
   }, []);
 
   const handleAddTeacherClick = () => {
@@ -42,7 +48,9 @@ function ViewTeacher() {
       showAddButton={showAddButton}
       modelName="teacher"
     >
-      {teacherList.length > 0 ? (
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : teacherList.length > 0 ? (
         <Table style={{ tableLayout: 'fixed' }}>
           <thead style={{ backgroundColor: 'rgba(182, 182, 182, 0.2)' }}>
             <tr>

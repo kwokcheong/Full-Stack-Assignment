@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import CustomCard from './CustomCard';
-import '../App.css';
+import CustomCard from '../CustomCard';
+import '../../../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import {
