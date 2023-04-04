@@ -82,6 +82,11 @@ function CreateClass() {
     }
   }, [formErrors, formValues, isSubmit, navigate]);
 
+  const handleBlur = () => {
+    const errors = validate(formValues);
+    setFormErrors(errors);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'level' && value !== '') {
@@ -173,6 +178,7 @@ function CreateClass() {
               MenuProps={MenuProps}
               value={formValues.level}
               onChange={handleChange}
+              onBlur={handleBlur}
               error={formErrors.level}
               id={
                 isLevelPlaceholder
@@ -207,6 +213,7 @@ function CreateClass() {
               name="name"
               placeholder="Class Name"
               onChange={handleChange}
+              onBlur={handleBlur}
               error={formErrors.name}
             />
           </FormControl>
@@ -225,6 +232,7 @@ function CreateClass() {
               MenuProps={MenuProps}
               value={formValues.teacherEmail}
               onChange={handleChange}
+              onBlur={handleBlur}
               error={Boolean(formErrors.teacherEmail)}
               id={
                 isTeacherPlaceholder
