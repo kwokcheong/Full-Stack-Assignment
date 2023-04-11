@@ -2,12 +2,11 @@ const { Teachers } = require('../models');
 
 const showTeachers = async (req, res) => {
   try {
-    const listOfTeachers = await Teachers.findAll({
-      attributes: { exclude: ['id'] },
-    });
+    const listOfTeachers = await Teachers.findAll();
 
     const formattedResponse = listOfTeachers.map((teacher) => {
       return {
+        id: String(teacher.id),
         name: String(teacher.name),
         subject: String(teacher.subject),
         email: String(teacher.email),
@@ -18,6 +17,37 @@ const showTeachers = async (req, res) => {
     res.send({ data: formattedResponse });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const editTeachers = async (req, res) => {
+  try {
+    const teacher = await Teachers.findOne({ where: { id: req.params.id } });
+
+    teacher.set({
+      name: req.body.name,
+      subject: req.body.subject,
+      email: req.body.email,
+      contactNumber: req.body.contactNumber,
+    });
+
+    await teacher.save();
+    res.status(200).json({ message: 'Teacher updated successfully' });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getTeacher = async (req, res) => {
+  try {
+    const teacher = await Teachers.findOne({
+      where: { id: req.params.id },
+      attributes: { exclude: ['id'] },
+    });
+
+    res.send({ data: teacher });
+  } catch {
+    console.log(err);
   }
 };
 
@@ -55,4 +85,6 @@ const insertTeachers = async (req, res) => {
 module.exports = {
   showTeachers,
   insertTeachers,
+  editTeachers,
+  getTeacher,
 };

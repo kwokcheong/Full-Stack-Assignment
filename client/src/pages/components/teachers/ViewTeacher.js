@@ -35,6 +35,10 @@ function ViewTeacher() {
     navigate('/createTeacher');
   };
 
+  const handleEditTeacherClick = (id) => {
+    navigate(`/editTeacher/${id}`);
+  };
+
   const shouldShowAddButton = (teacherList) => {
     return teacherList.length > 0;
   };
@@ -59,6 +63,7 @@ function ViewTeacher() {
               <th style={{ width: '25%' }}>Subject</th>
               <th style={{ width: '25%' }}>Email</th>
               <th style={{ width: '20%' }}>Work Contact</th>
+              <th style={{ width: '20%' }}>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -70,6 +75,15 @@ function ViewTeacher() {
                   <td>{val.subject}</td>
                   <td>{val.email}</td>
                   <td>{val.contactNumber}</td>
+                  <td>
+                    <a
+                      href=""
+                      onClick={() => handleEditTeacherClick(val.id)}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      Edit Teacher
+                    </a>
+                  </td>
                 </tr>
               );
             })}
