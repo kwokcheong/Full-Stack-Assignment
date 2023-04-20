@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Form from 'react-bootstrap/Form';
-import CustomCard from './CustomCard';
-import '../App.css';
+import CustomCard from '../CustomCard';
+import '../../../App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -81,6 +81,11 @@ function CreateClass() {
       }
     }
   }, [formErrors, formValues, isSubmit, navigate]);
+
+  const handleBlur = () => {
+    const errors = validate(formValues);
+    setFormErrors(errors);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -173,6 +178,7 @@ function CreateClass() {
               MenuProps={MenuProps}
               value={formValues.level}
               onChange={handleChange}
+              onBlur={handleBlur}
               error={formErrors.level}
               id={
                 isLevelPlaceholder
@@ -207,6 +213,7 @@ function CreateClass() {
               name="name"
               placeholder="Class Name"
               onChange={handleChange}
+              onBlur={handleBlur}
               error={formErrors.name}
             />
           </FormControl>
@@ -225,6 +232,7 @@ function CreateClass() {
               MenuProps={MenuProps}
               value={formValues.teacherEmail}
               onChange={handleChange}
+              onBlur={handleBlur}
               error={Boolean(formErrors.teacherEmail)}
               id={
                 isTeacherPlaceholder

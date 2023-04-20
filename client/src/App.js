@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import CreateTeacher from './pages/CreateTeacher';
-import ViewTeacher from './pages/ViewTeacher';
-import CreateClass from './pages/CreateClass';
-import ViewClass from './pages/ViewClass';
-import NavigationBar from './pages/NavigationBar';
+import CreateTeacher from './pages/components/teachers/CreateTeacher';
+import ViewTeacher from './pages/components/teachers/ViewTeacher';
+import CreateClass from './pages/components/classes/CreateClass';
+import ViewClass from './pages/components/classes/ViewClass';
+import NavigationBar from './pages/components/NavigationBar';
 
 function App() {
   return (
