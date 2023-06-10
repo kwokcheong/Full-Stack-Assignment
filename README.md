@@ -1,7 +1,5 @@
 # Full-Stack-Assignment
 
-_Hi! My name is Kwok cheong, you can just call me KC :) I had alot of fun working on this tech challenge, it is well designed and thoughtful. Thank you!!_
-
 ![Screenshot 2023-03-29 at 11 07 14 AM](https://user-images.githubusercontent.com/27864374/228416470-12ba08f0-aaf8-481d-a3d1-28402da3cc65.png)
 
 This is a fullstack assignment using NodeJS, ReactJS and MySQL.
